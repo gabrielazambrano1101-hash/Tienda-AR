@@ -2,339 +2,476 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tienda Free Fire PRO</title>
-
 <style>
-
-/* FONDO GAMER */
-body {
+* { 
+  box-sizing: border-box; 
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: white;
   background: url('https://wallpapers.com/images/featured/free-fire-neon-4k-7h0r9j7l8n9k0x1y.jpg') no-repeat center center fixed;
   background-size: cover;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
-/* OSCURECER */
 body::before {
   content: "";
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
   top: 0;
   left: 0;
   z-index: -1;
 }
 
-/* LOGIN */
 #login {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: #020617;
+  background: rgba(0,0,0,0.95);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
 }
 
 .login-box {
-  background: rgba(15,23,42,0.9);
-  padding: 30px;
-  border-radius: 15px;
+  background: rgba(15,23,42,0.98);
+  padding: 40px 30px;
+  border-radius: 25px;
   text-align: center;
-  box-shadow: 0 0 20px #9333ea;
+  border: 3px solid rgba(147,51,234,0.6);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+  max-width: 420px;
+  width: 90%;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.login-box h2 {
+  margin: 0 0 25px 0;
+  color: #facc15;
+  font-size: 1.9em;
+  text-shadow: 0 0 15px rgba(250,204,21,0.5);
 }
 
 .login-box input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  margin: 10px 0;
-  width: 200px;
-}
-
-.login-box button {
-  background: #9333ea;
-  border: none;
-  padding: 10px 20px;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* PARTICULAS */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-/* HEADER */
-header {
-  text-align: center;
-  padding: 40px;
-}
-
-h1 {
-  font-size: 40px;
-  text-shadow: 0 0 10px #9333ea, 0 0 30px #9333ea;
-}
-
-/* CONTENEDOR */
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
-
-/* TARJETAS */
-.card {
-  background: rgba(15,23,42,0.85);
-  margin: 20px 0;
-  padding: 15px;
+  width: 100%;
+  padding: 18px 20px;
+  margin: 15px 0;
+  border: 2px solid rgba(255,255,255,0.2);
   border-radius: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid rgba(147,51,234,0.3);
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px #9333ea;
-}
-
-/* PRECIO */
-.price {
-  color: #22c55e;
-  font-weight: bold;
-}
-
-/* BOTÓN */
-button {
-  background: #9333ea;
-  border: none;
-  padding: 10px 15px;
+  background: rgba(255,255,255,0.08);
   color: white;
-  border-radius: 10px;
+  font-size: 1.1em;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.login-box input:focus {
+  outline: none;
+  border-color: #9333ea;
+  box-shadow: 0 0 20px rgba(147,51,234,0.4);
+  background: rgba(255,255,255,0.12);
+}
+
+.login-box input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+button {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(45deg, #9333ea, #22c55e, #facc15);
+  background-size: 200% 200%;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
   cursor: pointer;
+  transition: all 0.4s ease;
+  margin-top: 15px;
   position: relative;
   overflow: hidden;
 }
 
-/* RIPPLE */
-button span {
+button::before {
+  content: '';
   position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  animation: ripple 0.6s linear;
-  background: rgba(255,255,255,0.6);
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
 }
 
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
+button:hover::before {
+  left: 100%;
 }
 
 button:hover {
-  background: #7e22ce;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(147,51,234,0.5);
 }
 
-/* SECCIONES */
+.product-img {
+  width: 75px;
+  height: 75px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 4px solid rgba(147,51,234,0.6);
+  box-shadow: 0 0 25px rgba(147,51,234,0.5);
+  transition: all 0.4s ease;
+}
+
+.product-img:hover {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 0 35px rgba(147,51,234,0.9);
+  border-color: #9333ea;
+}
+
+.card {
+  background: rgba(15,23,42,0.97);
+  margin: 25px 0;
+  padding: 30px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  border: 2px solid rgba(147,51,234,0.4);
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #9333ea, #22c55e, #facc15, #ef4444);
+  background-size: 300% 100%;
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(147,51,234,0.5);
+  border-color: #9333ea;
+}
+
+.product-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.4em;
+  color: #facc15;
+  text-shadow: 0 0 10px rgba(250,204,21,0.5);
+}
+
+.product-desc {
+  font-size: 0.95em;
+  opacity: 0.85;
+  margin: 0;
+  color: #e2e8f0;
+}
+
+.price {
+  color: #22c55e;
+  font-weight: bold;
+  font-size: 1.6em;
+  text-shadow: 0 0 15px rgba(34,197,94,0.7);
+  margin-bottom: 10px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+header {
+  text-align: center;
+  padding: 30px 20px;
+  display: none;
+}
+
+header h1 {
+  margin: 0 0 15px 0;
+  font-size: 2.8em;
+  background: linear-gradient(45deg, #facc15, #9333ea, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 10px #facc15); }
+  to { filter: drop-shadow(0 0 20px #9333ea); }
+}
+
+#mostrarID {
+  font-size: 1.6em !important;
+  color: #22c55e !important;
+  text-shadow: 0 0 15px rgba(34,197,94,0.8);
+  margin: 15px 0;
+}
+
+header p {
+  margin: 10px 0;
+  font-size: 1.3em;
+  opacity: 0.9;
+}
+
 h2 {
-  border-left: 5px solid #9333ea;
-  padding-left: 10px;
+  color: #9333ea;
+  text-align: center;
+  font-size: 2.2em;
+  margin: 50px 0 30px 0;
+  text-shadow: 0 0 25px rgba(147,51,234,0.7);
 }
 
-/* TELEGRAM */
+.alert {
+  color: #facc15;
+  text-align: center;
+  font-size: 1.3em;
+  padding: 25px;
+  background: rgba(249,204,21,0.15);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  border: 2px solid rgba(250,204,21,0.4);
+  box-shadow: 0 10px 30px rgba(250,204,21,0.2);
+}
+
 .whatsapp {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #229ED9;
-  padding: 15px;
+  bottom: 25px;
+  right: 25px;
+  width: 75px;
+  height: 75px;
+  background: linear-gradient(45deg, #25D366, #128C7E);
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2em;
+  box-shadow: 0 15px 40px rgba(37,211,102,0.5);
+  transition: all 0.4s ease;
   text-decoration: none;
-  color: white;
-  box-shadow: 0 0 15px #229ED9;
+  z-index: 100;
+  animation: pulse 2s infinite;
 }
 
-/* FOOTER */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.whatsapp:hover {
+  transform: scale(1.2) rotate(10deg);
+  box-shadow: 0 20px 50px rgba(37,211,102,0.7);
+}
+
 footer {
   text-align: center;
-  padding: 20px;
-  opacity: 0.7;
+  padding: 40px 20px;
+  background: rgba(15,23,42,0.95);
+  margin-top: 60px;
+  border-top: 3px solid rgba(147,51,234,0.5);
+  font-size: 1.1em;
 }
 
+#error {
+  color: #ef4444 !important;
+  font-weight: bold;
+  margin-top: 15px;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@media (max-width: 768px) {
+  .product-img { width: 65px; height: 65px; }
+  .card {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 25px 20px;
+  }
+  header h1 { font-size: 2.2em; }
+  h2 { font-size: 1.7em; }
+  .login-box { padding: 30px 20px; }
+  .container { padding: 20px 15px; }
+  .whatsapp { width: 65px; height: 65px; font-size: 2em; }
+}
 </style>
 </head>
 
 <body>
-
-<!-- LOGIN -->
+<!-- LOGIN MODAL -->
 <div id="login">
   <div class="login-box">
     <h2>🎮 Iniciar sesión por ID</h2>
-    <input type="text" id="userId" placeholder="Ingresa tu ID">
-    <br>
-    <button onclick="validarID()">Entrar</button>
-    <p id="error" style="color:red; display:none;">❌ Error: ID no encontrado</p>
+    <input type="text" id="userId" placeholder="Ingresa tu ID de Free Fire (ej: 12345678)" autocomplete="off" maxlength="16">
+    <button onclick="validarID()">🚀 ENTRAR A LA TIENDA</button>
+    <p id="error" style="display:none;">❌ Error: ID inválido (mínimo 3 caracteres)</p>
+    <p style="font-size:0.9em; opacity:0.7; margin-top:20px;">No compartimos tu ID con nadie ✅</p>
   </div>
 </div>
 
-<canvas id="particles"></canvas>
-
-<header>
-  <h1>🔥 TIENDA FREE FIRE 🔥</h1>
+<!-- CONTENIDO PRINCIPAL -->
+<header id="header" style="display:none;">
+  <h1>🔥 TIENDA FREE FIRE PRO 🔥</h1>
   <p id="mostrarID" style="color:#22c55e; font-weight:bold;"></p>
-  <p>Diamantes y Pase Booyah - Entrega Rápida ⚡</p>
-  <p>✅ Entrega rápida | 🔒 Pagos seguros | ⚡ Atención inmediata</p>
+  <p>💎 Diamantes 100% Originales | 🎟️ Pase Booyah Elite | ⚡ Entrega Inmediata 24/7</p>
 </header>
 
-<div class="container">
+<div class="container" id="content" style="display:none;">
+  <div class="alert">
+    🔥 <strong>¡OFERTAS LIMITADAS 48HS!</strong> - Stock volando 🚀
+  </div>
 
-<p style="color:#facc15;">🔥 Oferta limitada - Aprovecha ahora</p>
+  <h2>💎 Diamantes Free Fire</h2>
+  
+  <div class="card">
+    <img src="https://i.imgur.com/8zK5j2L.png" alt="1060 Diamantes" class="product-img">
+    <div class="product-info">
+      <h3>1060 Diamantes</h3>
+      <p class="product-desc">💎 Perfectos para skins y eventos</p>
+    </div>
+    <div>
+      <div class="price">$5,000</div>
+      <button onclick="comprar('https://mpago.la/2aCmCG8', '1060 Diamantes')">🛒 Comprar Ahora</button>
+    </div>
+  </div>
 
-<h2>💎 Diamantes</h2>
+  <div class="card">
+    <img src="https://i.imgur.com/QpL8mNx.png" alt="2180 Diamantes" class="product-img">
+    <div class="product-info">
+      <h3>2180 Diamantes</h3>
+      <p class="product-desc">⭐ Mejor precio por diamante</p>
+    </div>
+    <div>
+      <div class="price">$10,000</div>
+      <button onclick="comprar('https://mpago.la/1EvBC1f', '2180 Diamantes')">🛒 Comprar Ahora</button>
+    </div>
+  </div>
 
-<div class="card">
-  <span>1060 diamantes</span>
-  <span class="price">$5000</span>
-  <button onclick="comprar(event, 'https://mpago.la/2aCmCG8')">Comprar</button>
+  <div class="card">
+    <img src="https://i.imgur.com/3vW7k8P.png" alt="5600 Diamantes" class="product-img">
+    <div class="product-info">
+      <h3>5600 Diamantes</h3>
+      <p class="product-desc">👑 Para jugadores PRO y Booyah Pass</p>
+    </div>
+    <div>
+      <div class="price">$15,000</div>
+      <button onclick="comprar('https://mpago.la/22fweLo', '5600 Diamantes')">🛒 Comprar Ahora</button>
+    </div>
+  </div>
+
+  <h2>🎟️ Pases Élite</h2>
+  
+  <div class="card">
+    <img src="https://i.imgur.com/KnR4tXy.png" alt="Pase Booyah" class="product-img">
+    <div class="product-info">
+      <h3>Pase Booyah Elite</h3>
+      <p class="product-desc">🏆 Todas las recompensas + skin exclusiva</p>
+    </div>
+    <div>
+      <div class="price">$1,500</div>
+      <button onclick="comprar('https://mpago.la/2yEerku', 'Pase Booyah Elite')">🛒 Comprar Ahora</button>
+    </div>
+  </div>
+
+  <h2>🔫 Skins Exclusivas</h2>
+  
+  <div class="card">
+    <img src="https://i.imgur.com/YmP9qRs.png" alt="MP40 Legendaria" class="product-img">
+    <div class="product-info">
+      <h3>MP40 Legendaria</h3>
+      <p class="product-desc">💥 Skin dorada con animación kill</p>
+    </div>
+    <div>
+      <div class="price">$8,000</div>
+      <button onclick="comprar('https://mpago.la/EXAMPLE', 'MP40 Legendaria')">🛒 Comprar Ahora</button>
+    </div>
+  </div>
 </div>
 
-<div class="card">
-  <span>2180 diamantes</span>
-  <span class="price">$10000</span>
-  <button onclick="comprar(event, 'https://mpago.la/1EvBC1f')">Comprar</button>
-</div>
-
-<div class="card">
-  <span>5600 diamantes</span>
-  <span class="price">$15000</span>
-  <button onclick="comprar(event, 'https://mpago.la/22fweLo')">Comprar</button>
-</div>
-
-<h2>🎟️ Pase Booyah</h2>
-
-<div class="card">
-  <span>Pase Booyah</span>
-  <span class="price">$1500</span>
-  <button onclick="comprar(event, 'https://mpago.la/2yEerku')">Comprar</button>
-</div>
-
-</div>
-
-<!-- TELEGRAM -->
-<a class="whatsapp" id="telegramBtn" href="#" target="_blank">📩</a>
+<!-- WHATSAPP FLOTANTE -->
+<a class="whatsapp" href="https://wa.me/1234567890?text=🔥%20Hola!%20Quiero%20comprar%20desde%20Tienda%20Free%20Fire%20PRO%20%0A%0AMi%20ID:%20[tu%20ID]%0AProducto:%20[producto]" target="_blank" title="Hablar por WhatsApp">
+  💬
+</a>
 
 <footer>
-  © 2026 Tienda Free Fire PRO
+  © 2026 Tienda Free Fire PRO | 💎 Diamantes 100% Originales y Seguros | ⚡ Entrega 24/7 | 🇦🇷 Argentina
 </footer>
 
 <script>
+let usuarioLogueado = '';
 
-/* LOGIN */
-function validarID(){
-  let id = document.getElementById("userId").value;
-  let error = document.getElementById("error");
-
-  let regex = /^[0-9]{8,12}$/;
-
-  if(regex.test(id)){
-    localStorage.setItem("usuarioID", id);
-    document.getElementById("login").style.display = "none";
-    mostrarUsuario();
+function validarID() {
+  const idInput = document.getElementById('userId');
+  const id = idInput.value.trim();
+  const error = document.getElementById('error');
+  
+  if (id.length >= 3) {
+    usuarioLogueado = id;
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('header').style.display = 'block';
+    document.getElementById('content').style.display = 'block';
+    document.getElementById('mostrarID').textContent = `👤 ID Conectado: ${id}`;
+    error.style.display = 'none';
+    
+    // Guardar en localStorage para mantener sesión
+    localStorage.setItem('userID', id);
+    
+    // Auto-login si ya tiene sesión
+    setTimeout(() => {
+      const savedID = localStorage.getItem('userID');
+      if (savedID && !usuarioLogueado) {
+        usuarioLogueado = savedID;
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('header').style.display = 'block';
+        document.getElementById('content').style.display = 'block';
+        document.getElementById('mostrarID').textContent = `👤 ID Conectado: ${savedID}`;
+      }
+    }, 100);
+    
   } else {
-    error.style.display = "block";
+    error.style.display = 'block';
+    idInput.focus();
   }
 }
 
-/* MOSTRAR ID */
-function mostrarUsuario(){
-  let id = localStorage.getItem("usuarioID");
-  if(id){
-    document.getElementById("mostrarID").innerText = "👤 Jugador: " + id;
-  }
-}
-
-/* TELEGRAM AUTOMÁTICO */
-document.getElementById("telegramBtn").addEventListener("click", function(){
-  let id = localStorage.getItem("usuarioID") || "No especificado";
-  let mensaje = "Hola, quiero comprar en la tienda Free Fire 🎮%0AID: " + id;
-  let url = "https://t.me/Vaneegzz?text=" + mensaje;
-  window.open(url, "_blank");
-});
-
-/* COMPRA */
-function comprar(e, link){
-  let audio = new Audio("https://www.myinstants.com/media/sounds/click.mp3");
-  audio.play();
-
-  let circle = document.createElement("span");
-  let rect = e.target.getBoundingClientRect();
-  circle.style.left = e.clientX - rect.left + "px";
-  circle.style.top = e.clientY - rect.top + "px";
-  e.target.appendChild(circle);
-
-  setTimeout(()=> circle.remove(), 600);
-
-  setTimeout(() => {
-    window.open(link, "_blank");
-  }, 300);
-}
-
-/* PARTICULAS */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<60;i++){
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*2,
-    d: Math.random()*1
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="#9333ea";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-  });
-  update();
-}
-
-function update(){
-  particles.forEach(p=>{
-    p.y += p.d;
-    if(p.y > canvas.height) p.y = 0;
-  });
-}
-
-setInterval(draw,30);
-
-/* CARGAR ID */
-window.onload = function(){
-  mostrarUsuario();
-}
-
-</script>
-
-</body>
-</html>
+function comprar(url, producto) {
+  if (
