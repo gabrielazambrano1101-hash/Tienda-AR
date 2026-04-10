@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,26 +6,63 @@
 
 <style>
 
-/* FONDO CON IMAGEN */
+/* FONDO GAMER */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   color: white;
-  background: url('https://i.imgur.com/8QZ7Z7X.jpeg') no-repeat center center fixed;
+  background: url('https://wallpapers.com/images/featured/free-fire-neon-4k-7h0r9j7l8n9k0x1y.jpg') no-repeat center center fixed;
   background-size: cover;
   overflow-x: hidden;
 }
 
-/* OSCURECER FONDO */
+/* OSCURECER */
 body::before {
   content: "";
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.7);
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+/* LOGIN */
+#login {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #020617;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.login-box {
+  background: rgba(15,23,42,0.9);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px #9333ea;
+}
+
+.login-box input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin: 10px 0;
+  width: 200px;
+}
+
+.login-box button {
+  background: #9333ea;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 /* PARTICULAS */
@@ -117,17 +153,17 @@ h2 {
   padding-left: 10px;
 }
 
-/* WHATSAPP */
+/* TELEGRAM */
 .whatsapp {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #25D366;
+  background: #229ED9;
   padding: 15px;
   border-radius: 50%;
   text-decoration: none;
   color: white;
-  box-shadow: 0 0 15px #25D366;
+  box-shadow: 0 0 15px #229ED9;
 }
 
 /* FOOTER */
@@ -142,17 +178,28 @@ footer {
 
 <body>
 
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <h2>🎮 Iniciar sesión por ID</h2>
+    <input type="text" id="userId" placeholder="Ingresa tu ID">
+    <br>
+    <button onclick="validarID()">Entrar</button>
+    <p id="error" style="color:red; display:none;">❌ Error: ID no encontrado</p>
+  </div>
+</div>
+
 <canvas id="particles"></canvas>
 
 <header>
   <h1>🔥 TIENDA FREE FIRE 🔥</h1>
+  <p id="mostrarID" style="color:#22c55e; font-weight:bold;"></p>
   <p>Diamantes y Pase Booyah - Entrega Rápida ⚡</p>
-  <p>✅ Entrega rápida | 🔒 Pagos seguros | ⚡ Atención inmediata</p>
 </header>
 
 <div class="container">
 
-<p style="color:#facc15;">🔥 Oferta limitada - Aprovecha ahora</p>
+<p style="color:#facc15;">🔥 Oferta limitada</p>
 
 <h2>💎 Diamantes</h2>
 
@@ -184,8 +231,9 @@ footer {
 
 </div>
 
-<a class="whatsapp" href="https://wa.me/549XXXXXXXXXX" target="_blank">
-💬 Soporte
+<!-- TELEGRAM -->
+<a class="whatsapp" id="telegramBtn" href="#" target="_blank">
+📩
 </a>
 
 <footer>
@@ -194,8 +242,40 @@ footer {
 
 <script>
 
-function comprar(e, link){
+/* LOGIN */
+function validarID(){
+  let id = document.getElementById("userId").value;
+  let error = document.getElementById("error");
 
+  let regex = /^[0-9]{8,12}$/;
+
+  if(regex.test(id)){
+    localStorage.setItem("usuarioID", id);
+    document.getElementById("login").style.display = "none";
+    mostrarUsuario();
+  } else {
+    error.style.display = "block";
+  }
+}
+
+/* MOSTRAR ID */
+function mostrarUsuario(){
+  let id = localStorage.getItem("usuarioID");
+  if(id){
+    document.getElementById("mostrarID").innerText = "👤 Jugador: " + id;
+  }
+}
+
+/* TELEGRAM AUTOMÁTICO */
+document.getElementById("telegramBtn").addEventListener("click", function(){
+  let id = localStorage.getItem("usuarioID") || "No especificado";
+  let mensaje = "Hola, quiero comprar en la tienda Free Fire 🎮%0AID: " + id;
+  let url = "https://t.me/Vaneegzz?text=" + mensaje;
+  window.open(url, "_blank");
+});
+
+/* COMPRA */
+function comprar(e, link){
   let audio = new Audio("https://www.myinstants.com/media/sounds/click.mp3");
   audio.play();
 
@@ -250,7 +330,11 @@ function update(){
 
 setInterval(draw,30);
 
+window.onload = function(){
+  mostrarUsuario();
+}
+
 </script>
 
 </body>
-  </html>
+</html>
