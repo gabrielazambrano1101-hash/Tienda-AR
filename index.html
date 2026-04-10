@@ -16,20 +16,18 @@ body{
   font-family:'Segoe UI',sans-serif;
   color:white;
   min-height:100vh;
-  background: linear-gradient(-45deg, #38bdf8, #3b82f6, #9333ea, #a855f7);
-  background-size: 400% 400%;
-  animation: gradientBG 10s ease infinite;
-}
-
-@keyframes gradientBG{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+  background-image:url('Free23.png');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
 }
 
 body::before{
   content:"";
   position:fixed;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
   background:rgba(0,0,0,0.55);
@@ -165,6 +163,7 @@ button:hover{
 <a class="telegram" href="https://t.me/Vaneegzz" target="_blank">✈️</a>
 
 <script>
+
 function obtenerID(){
   const id=document.getElementById('userId').value.trim();
   const regex=/^[0-9]{6,}$/;
@@ -195,6 +194,7 @@ function comprar(url,producto){
     window.open(telegram,'_blank');
   },800);
 }
+
 </script>
 
 </body>
